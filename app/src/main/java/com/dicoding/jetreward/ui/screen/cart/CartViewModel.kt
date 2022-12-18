@@ -19,8 +19,7 @@ class CartViewModel(
             _uiState.value = UiState.Loading
             repository.getAddedOrderRewards()
                 .collect { orderReward ->
-                    val totalRequiredPoint =
-                        orderReward.sumOf { it.reward.requiredPoint * it.count }
+                    val totalRequiredPoint = orderReward.sumOf { it.reward.requiredPoint * it.count }
                     _uiState.value = UiState.Success(CartState(orderReward, totalRequiredPoint))
                 }
         }

@@ -1,5 +1,7 @@
 package com.dicoding.jetreward
 
+import android.content.Context
+import android.content.Intent
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -30,9 +32,14 @@ fun JetRewardApp(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController()
 ) {
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = navBackStackEntry?.destination?.route
+
     Scaffold(
         bottomBar = {
-            BottomBar(navController = navController)
+            if (currentRoute != Screen.DetailReward.route){
+                BottomBar(navController = navController)
+            }
         },
         modifier = modifier
     ) { innerPadding ->
@@ -96,6 +103,8 @@ fun BottomBar(
         }
     }
 }
+
+
 
 @Preview(showBackground = true)
 @Composable
